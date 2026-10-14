@@ -233,6 +233,12 @@ func preprocess(b *mtgmatcher.Backend, cardName, edition, notes, imgURL string, 
 		variant = vars
 	}
 
+	isFoil := false
+	if strings.Contains(cardName, "FOIL") {
+		cardName = strings.Replace(cardName, " FOIL", "", 1)
+		isFoil = true
+	}
+
 	if strings.Contains(cardName, "Signed") && strings.Contains(cardName, "by") {
 		cuts := mtgmatcher.Cut(cardName, "Signed")
 		cardName = cuts[0]
@@ -245,12 +251,6 @@ func preprocess(b *mtgmatcher.Backend, cardName, edition, notes, imgURL string, 
 			variant += " "
 		}
 		variant += strings.Join(variants[1:], " ")
-	}
-
-	isFoil := false
-	if strings.Contains(cardName, "FOIL") {
-		cardName = strings.Replace(cardName, " FOIL", "", 1)
-		isFoil = true
 	}
 
 	if strings.HasSuffix(cardName, "Promo") {

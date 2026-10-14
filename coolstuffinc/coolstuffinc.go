@@ -563,7 +563,7 @@ func (csi *Coolstuffinc) processSearch(ctx context.Context, results chan<- respo
 					csi.printf("unsupported %s condition", conditions)
 					return
 				}
-				if strings.Contains(cardName, "Signed by") {
+				if strings.Contains(cardName, "Signed") && strings.Contains(cardName, "by") {
 					grade = mtgban.HP
 				}
 
